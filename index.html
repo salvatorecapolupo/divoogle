@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motore di Ricerca</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Motore di Ricerca Personalizzato</h1>
+    <form id="searchForm">
+      <div class="mb-3">
+        <label for="searchInput" class="form-label">Inserisci la tua ricerca:</label>
+        <input type="text" class="form-control" id="searchInput" placeholder="Es. permessi studio">
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Cerca</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('searchForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Evita il refresh della pagina
+      const query = encodeURIComponent(document.getElementById('searchInput').value);
+      const baseUrls = [
+        'https://divittoriolattanzio.it/home/index.php/component/search/?searchword=',
+        'https://divittoriolattanzio.it/home/index.php/component/search/?searchword=libera+professione&ordering=newest&searchphrase=all'
+      ];
+
+      baseUrls.forEach(baseUrl => {
+        const fullUrl = baseUrl.includes('libera+professione') 
+                        ? baseUrl 
+                        : `${baseUrl}${query}&ordering=newest&searchphrase=all`;
+        window.open(fullUrl, '_blank');
+      });
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
